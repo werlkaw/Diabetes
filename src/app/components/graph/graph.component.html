@@ -1,0 +1,55 @@
+<div id="centered-content">
+  <table *ngIf="!hideButtons">
+    <tr>
+        <select [(ngModel)]="selectedMonth" (change)="updateGraph()">
+          <option *ngFor="let month of months" [value]="month.id">{{month.name}}</option>
+        </select>
+        <select [(ngModel)]="selectedYear" (change)="updateGraph()">
+          <option *ngFor="let year of years" [value]="year">{{year}}</option>
+        </select>
+        <button (click)="print()">Imprimir</button>
+    </tr>
+  </table>
+  <table id="main-table">
+    <tr>
+      <table id="doctor-info">
+        <tr>
+          Dra. Mónica Quintana
+        </tr>
+        <tr>
+          Diabetes y Síndrome Metabolico
+        </tr>
+      </table>
+    </tr>
+    <tr>
+      <div align="right">
+        <table class="formatted-cells" id="measurement-times-table" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="long-td">Ayuno</td>
+            <td class="long-td">Desayuno 2 horas despues</td>
+            <td class="long-td">Comida Antes</td>
+            <td class="long-td">Comida 2 horas despues</td>
+            <td class="long-td">Cena Antes</td>
+            <td class="long-td">Cena 2 horas despues</td>
+          </tr>
+        </table>
+      </div>
+    </tr>
+    <tr>
+      <table class="formatted-cells" id="measurement-dates-table" cellspacing="0" cellpadding="0">
+        <tr *ngFor="let currDay of daysInGraph">
+          <td class="short-td"><b>{{currDay.number}}</b></td>
+          <td class="long-td">{{currDay.dayOfWeek}}</td>
+          <td class="long-td"></td>
+          <td class="long-td"></td>
+          <td class="long-td"></td>
+          <td class="long-td"></td>
+          <td class="long-td"></td>
+          <td class="long-td"></td>
+        </tr>
+        <tr>
+        </tr>
+      </table>
+    </tr>
+  </table>
+</div>

@@ -1,0 +1,42 @@
+#centered-content {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+}
+
+#main-table {
+    display: inline-block;
+}
+
+#doctor-info tr {
+    text-align: left;
+    font-size: 20px;
+}
+
+#doctor-info {
+    padding-bottom: 10px;
+}
+
+.formatted-cells {
+    border-collapse: collapse;
+    font-size: 11px;
+}
+
+.formatted-cells tr td {
+    text-align: center;
+    border-style: solid;
+    border-width: 2px;
+    border-color:  grey;
+    padding: 3px;
+}
+
+.long-td {
+    width: 80px;
+}
+
+.short-td {
+    width: 15px;
+}
+
+select {
+    margin: 5px;
+}
