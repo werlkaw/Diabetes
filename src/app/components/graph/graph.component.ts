@@ -65,7 +65,7 @@ export class GraphComponent implements OnInit {
     }, 100)
     setTimeout(() => {
       this.hideButtons = false
-    }, 200)
+    }, 1000)
   }
 
   public getCurrentDoctorName() {
