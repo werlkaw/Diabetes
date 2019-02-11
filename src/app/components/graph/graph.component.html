@@ -1,23 +1,39 @@
 <div id="centered-content">
-  <table *ngIf="!hideButtons">
-    <tr>
-        <select [(ngModel)]="selectedMonth" (change)="updateGraph()">
-          <option *ngFor="let month of months" [value]="month.id">{{month.name}}</option>
-        </select>
-        <select [(ngModel)]="selectedYear" (change)="updateGraph()">
-          <option *ngFor="let year of years" [value]="year">{{year}}</option>
-        </select>
-        <button (click)="print()">Imprimir</button>
-    </tr>
-  </table>
   <table id="main-table">
+    <tr>
+      <table *ngIf="!hideButtons">
+          <tr>
+              <select [(ngModel)]="selectedDoctor" (change)="recordDoctor()">
+                <option value="-1" disabled selected>Seleccione su nombre</option>
+                <option *ngFor="let doctor of doctors" [value]="doctor.id">{{doctor.name}}</option>
+              </select>
+              <select [(ngModel)]="selectedMonth" (change)="updateGraph()">
+                <option *ngFor="let month of months" [value]="month.id">{{month.name}}</option>
+              </select>
+              <select [(ngModel)]="selectedYear" (change)="updateGraph()">
+                <option *ngFor="let year of years" [value]="year">{{year}}</option>
+              </select>
+              <button (click)="print()">Imprimir</button>
+          </tr>
+        </table>
+    </tr>
     <tr>
       <table id="doctor-info">
         <tr>
-          Dra. Mónica Quintana
+          <td>
+            {{getCurrentDoctorName()}}
+          </td>
+          <td class="align-right">
+            {{months[selectedMonth].name + " " + selectedYear}}
+          </td>
         </tr>
         <tr>
-          Diabetes y Síndrome Metabolico
+          <td>
+            Diabetes y Síndrome Metabolico
+          </td>
+          <td class="align-right">
+            Nombre: __________________________
+          </td>
         </tr>
       </table>
     </tr>

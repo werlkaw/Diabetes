@@ -12,7 +12,12 @@
     font-size: 20px;
 }
 
+.align-right {
+    text-align: right;
+}
+
 #doctor-info {
+    width: 100%;
     padding-bottom: 10px;
 }
 

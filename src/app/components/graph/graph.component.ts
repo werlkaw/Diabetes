@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'angular2-cookie/core'
+
+const COOKIE_DOCTOR_KEY = "doctor"
 
 @Component({
   selector: 'app-graph',
@@ -9,8 +12,13 @@ export class GraphComponent implements OnInit {
   public hideButtons = false
   public selectedMonth = 0
   public selectedYear = 0
+  public selectedDoctor = -1
   public years = [
     2019, 2020, 2021, 2022
+  ]
+  public doctors = [
+    {id: 0, name: "Dra. Mónica Quintana"},
+    {id: 1, name: "Dr. Gerardo López Martínez"}
   ]
   public months = [
     {id: 0,  name: "enero"},
@@ -37,12 +45,16 @@ export class GraphComponent implements OnInit {
   ])
 
   public daysInGraph = [];
-  constructor() { }
+  constructor(private localCookies: CookieService) { }
 
   ngOnInit() {
     var currentDate = new Date()
     this.selectedMonth = currentDate.getMonth()
     this.selectedYear = currentDate.getFullYear()
+    var cookieDoctor = this.localCookies.get(COOKIE_DOCTOR_KEY)
+    if (cookieDoctor) {
+      this.selectedDoctor = +cookieDoctor
+    }
     this.updateGraph()
   }
 
@@ -51,6 +63,17 @@ export class GraphComponent implements OnInit {
     setTimeout(() => {
       window.print()
     }, 100)
+    setTimeout(() => {
+      this.hideButtons = false
+    }, 200)
+  }
+
+  public getCurrentDoctorName() {
+    return this.selectedDoctor > -1 ? this.doctors[this.selectedDoctor].name : ""
+  }
+
+  public recordDoctor() {
+    this.localCookies.put(COOKIE_DOCTOR_KEY, this.selectedDoctor.toString())
   }
 
   public updateGraph() {

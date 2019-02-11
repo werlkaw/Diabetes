@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { GraphComponent } from './components/graph/graph.component';
+import { CookieService } from 'angular2-cookie';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,9 @@ import { GraphComponent } from './components/graph/graph.component';
     BrowserModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
