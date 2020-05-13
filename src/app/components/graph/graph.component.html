@@ -13,6 +13,10 @@
               <select [(ngModel)]="selectedYear" (change)="updateGraph()">
                 <option *ngFor="let year of years" [value]="year">{{year}}</option>
               </select>
+              <select [(ngModel)]="selectedPlan" (change)="updateGraph()">
+                <option value="-1" disabled selected>Seleccione el Plan</option>
+                <option *ngFor="let plan of plans" [value]="plan">{{plan}}</option>
+              </select>
               <button (click)="print()">Imprimir</button>
           </tr>
         </table>
@@ -28,11 +32,16 @@
           </td>
         </tr>
         <tr>
+          <td *ngIf="!hideButtons">
+            Paciente: <input [(ngModel)]="patientName" type=text/>
+          </td>
+          <td *ngIf="hideButtons">
+            Paciente: {{patientName}}
+          </td>
+        </tr>
+        <tr>
           <td>
             Diabetes y Síndrome Metabolico
-          </td>
-          <td class="align-right">
-            Nombre: __________________________
           </td>
         </tr>
       </table>
@@ -56,12 +65,12 @@
         <tr *ngFor="let currDay of daysInGraph">
           <td class="short-td"><b>{{currDay.number}}</b></td>
           <td class="long-td">{{currDay.dayOfWeek}}</td>
-          <td class="long-td"></td>
-          <td class="long-td"></td>
-          <td class="long-td"></td>
-          <td class="long-td"></td>
-          <td class="long-td"></td>
-          <td class="long-td"></td>
+          <td class="long-td" id='1-{{currDay.number}}'></td>
+          <td class="long-td" id='2-{{currDay.number}}'></td>
+          <td class="long-td" id='3-{{currDay.number}}'></td>
+          <td class="long-td" id='4-{{currDay.number}}'></td>
+          <td class="long-td" id='5-{{currDay.number}}'></td>
+          <td class="long-td" id='6-{{currDay.number}}'></td>
         </tr>
         <tr>
         </tr>

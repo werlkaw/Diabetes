@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { GraphComponent } from './components/graph/graph.component';
 import { CookieService } from 'angular2-cookie';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { CookieService } from 'angular2-cookie';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [
     CookieService

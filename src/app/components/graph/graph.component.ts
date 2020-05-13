@@ -3,6 +3,11 @@ import { CookieService } from 'angular2-cookie/core'
 
 const COOKIE_DOCTOR_KEY = "doctor"
 
+type TableRow = {
+  number: number,
+  dayOfWeek: string
+}
+
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
@@ -13,12 +18,18 @@ export class GraphComponent implements OnInit {
   public selectedMonth = 0
   public selectedYear = 0
   public selectedDoctor = -1
+  public selectedPlan = "";
+  public patientName: string;
   public years = [
     2019, 2020, 2021, 2022
   ]
   public doctors = [
     {id: 0, name: "Dra. Mónica Quintana"},
     {id: 1, name: "Dr. Gerardo López Martínez"}
+  ]
+
+  public plans = [
+    "Escaloneada", "Pareada", "Ayuno/Pre-cena"
   ]
   public months = [
     {id: 0,  name: "enero"},
@@ -44,7 +55,7 @@ export class GraphComponent implements OnInit {
     [6, "sábado"],
   ])
 
-  public daysInGraph = [];
+  public daysInGraph: TableRow[] = [];
   constructor(private localCookies: CookieService) { }
 
   ngOnInit() {
@@ -76,6 +87,35 @@ export class GraphComponent implements OnInit {
     this.localCookies.put(COOKIE_DOCTOR_KEY, this.selectedDoctor.toString())
   }
 
+  private updatePlan() {
+    if (this.selectedPlan == "Escaloneada") {
+      let currColumn = 1;
+      for (let day of this.daysInGraph) {
+        console.log(currColumn + '-' + day.number);
+        let currSquare = document.getElementById(currColumn + "-" + day.number);
+        currSquare.style.backgroundColor = "#D7D7D7";
+        currColumn = (currColumn%6) + 1;
+      }
+    } else if (this.selectedPlan == "Pareada") {
+      let columns = [1, 3, 5];
+      let currColumn = 0;
+      for (let day of this.daysInGraph) {
+        let currSquare = document.getElementById(columns[currColumn] + "-" + day.number);
+        let secondSquare = document.getElementById((columns[currColumn] + 1) + "-" + day.number);
+        currSquare.style.backgroundColor = "#D7D7D7";
+        secondSquare.style.backgroundColor = "#D7D7D7";
+        currColumn = (currColumn+1)%3;
+      }
+    } else if (this.selectedPlan == "Ayuno/Pre-cena") {
+      for (let day of this.daysInGraph) {
+        let currSquare = document.getElementById("1-" + day.number);
+        let secondSquare = document.getElementById("5-" + day.number);
+        currSquare.style.backgroundColor = "#D7D7D7";
+        secondSquare.style.backgroundColor = "#D7D7D7";
+      }
+    }
+  }
+
   public updateGraph() {
     this.daysInGraph = []
     var currDate = new Date(this.selectedYear + "/" + (+this.selectedMonth + 1) + "/" + "01")
@@ -86,5 +126,9 @@ export class GraphComponent implements OnInit {
       })
       currDate = new Date(currDate.getTime() + 86400000)
     }
+    // Give DOM time to update.
+    setTimeout(() => {
+      this.updatePlan();
+    }, 500);
   }
 }

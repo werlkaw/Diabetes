@@ -36,6 +36,7 @@
 
 .long-td {
     width: 80px;
+    -webkit-print-color-adjust: exact;
 }
 
 .short-td {
