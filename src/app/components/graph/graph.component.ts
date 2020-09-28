@@ -25,7 +25,8 @@ export class GraphComponent implements OnInit {
   ]
   public doctors = [
     {id: 0, name: "Dra. Mónica Quintana"},
-    {id: 1, name: "Dr. Gerardo López Martínez"}
+    {id: 1, name: "Dr. Gerardo López Martínez"},
+    {id: 2, name: "Dr. Jesús López Carrizoza"}
   ]
 
   public plans = [
