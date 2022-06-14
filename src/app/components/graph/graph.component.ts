@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-//import { CookieService } from 'ngx-cookie'
-//import { CookieService } from 'ngx-cookie';
+import { CookieService } from 'ngx-cookie-service';
 
 const COOKIE_DOCTOR_KEY = "doctor"
 
@@ -58,17 +57,16 @@ export class GraphComponent implements OnInit {
   ])
 
   public daysInGraph: TableRow[] = [];
-  //constructor(private localCookies: CookieService) { }
-  constructor() {}
+  constructor(private localCookies: CookieService) { }
 
   ngOnInit() {
     var currentDate = new Date()
     this.selectedMonth = currentDate.getMonth()
     this.selectedYear = currentDate.getFullYear()
-    // var cookieDoctor = this.localCookies.get(COOKIE_DOCTOR_KEY)
-    // if (cookieDoctor) {
-    //   this.selectedDoctor = +cookieDoctor
-    // }
+    var cookieDoctor = this.localCookies.get(COOKIE_DOCTOR_KEY)
+    if (cookieDoctor) {
+      this.selectedDoctor = +cookieDoctor
+    }
     this.updateGraph()
   }
 
@@ -87,7 +85,7 @@ export class GraphComponent implements OnInit {
   }
 
   public recordDoctor() {
-    //this.localCookies.put(COOKIE_DOCTOR_KEY, this.selectedDoctor.toString())
+    this.localCookies.set(COOKIE_DOCTOR_KEY, this.selectedDoctor.toString())
   }
 
   private updatePlan() {
