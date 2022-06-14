@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CookieService } from 'angular2-cookie/core'
+//import { CookieService } from 'ngx-cookie'
+import { CookieService } from 'ngx-cookie';
 
 const COOKIE_DOCTOR_KEY = "doctor"
 
@@ -21,7 +22,7 @@ export class GraphComponent implements OnInit {
   public selectedPlan = "";
   public patientName: string;
   public years = [
-    2019, 2020, 2021, 2022
+    2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030
   ]
   public doctors = [
     {id: 0, name: "Dra. Mónica Quintana"},
@@ -58,6 +59,7 @@ export class GraphComponent implements OnInit {
 
   public daysInGraph: TableRow[] = [];
   constructor(private localCookies: CookieService) { }
+  //constructor() {}
 
   ngOnInit() {
     var currentDate = new Date()
